@@ -17,10 +17,7 @@ export default class About extends React.Component {
 
 const style = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: '#ff4b66',
     },
 
 });
