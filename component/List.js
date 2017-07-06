@@ -2,14 +2,18 @@ import React from 'react'
 import style from './Style'
 import axios from 'axios'
 import WeatherRow from './weather/Row'
-import { Text, ActivityIndicator,ListView} from 'react-native'
+import {Image, Text, ActivityIndicator,ListView} from 'react-native'
 
 export default class  List extends React.Component{
 
     static navigationOptions = ({navigation}) =>{
         return{
-            // title : `Météo / ${navigation.state.params.city}`
-            title : `Météo / villejuif`
+            // title : `Météo / ${navigation.state.params.city}`,
+            title : `Météo`,
+            tabBarIcon:( ) => {
+                return <Image style={{width:20,height: 20}} source={require('./icons/home.png')}/>
+            }
+
         }
     }
 
@@ -18,10 +22,13 @@ export default class  List extends React.Component{
 
         this.state={
             // city:this.props.navigation.state.params.city,
-            city:'Villejuif',
+            city:'Montpellier',
             report:null
         }
-        this.fetchWeather()
+        setTimeout(() =>{
+            this.fetchWeather()
+        },1000)
+
     }
     fetchWeather(){
         axios.get(`http://api.openweathermap.org/data/2.5/forecast/daily?q=${this.state.city}&mode=json&units=metric&cnt=10&appid=1b16884eab17ddc058d45c7e44d75104`)

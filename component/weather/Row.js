@@ -39,23 +39,40 @@ export default class Row extends React.Component{
                 image = require('../icons/sun.png')
         }
         return <Image source ={image} style={{width :size,height:size}}/>
-        return <Text>fuck</Text>
     }
 
     render () {
-        return (
-            <View style={style.view}>
-                <View style={{flex:1,flexDirection:'row', alignItems:'center'}}>
-                    { this.icon() }
-                    <Text style={{marginLeft:10}}>
-                        {this.day()} {this.date()}
+        if(this.props.index === 0) {
+            return (
+                <View style={[style.view,style.firstView]}>
+                    <View>
+
+                        <Text style={{marginLeft:10}}>
+                            {this.day()} {this.date()}
+                        </Text>
+                        { this.icon(90) }
+                    </View>
+                    <Text style={[style.temp,{fontSize:35}]}>
+                        {Math.round(this.props.day.temp.day)}C°
                     </Text>
                 </View>
-                <Text style={style.temp}>
-                    {Math.round(this.props.day.temp.day)}C°
-                </Text>
-            </View>
-        )
+            )
+        } else {
+            return (
+                <View style={style.view}>
+                    <View style={{flex:1,flexDirection:'row', alignItems:'center'}}>
+                        { this.icon() }
+                        <Text style={{marginLeft:10}}>
+                            {this.day()} {this.date()}
+                        </Text>
+                    </View>
+                    <Text style={style.temp}>
+                        {Math.round(this.props.day.temp.day)}C°
+                    </Text>
+                </View>
+            )
+        }
+
     }
 }
 const style = StyleSheet.create({
@@ -83,6 +100,9 @@ const style = StyleSheet.create({
 
     bold: {
         fontWeight:'bold'
+    },
+    firstView : {
+        backgroundColor: '#E54B65'
     }
 
 })
